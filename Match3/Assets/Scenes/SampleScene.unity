@@ -159,7 +159,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.22043432, g: 0.25211027, b: 0.3018868, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -254,3 +254,12 @@ MonoBehaviour:
   width: 7
   height: 10
   tilePrefab: {fileID: 3144627602654822748, guid: b25bc509dd909da4d8bfeeb39f5c855a, type: 3}
+  dots:
+  - {fileID: 7465133341868169220, guid: 65249e893704c67469c47998aab05fc4, type: 3}
+  - {fileID: 5781693576166362695, guid: 77d9a421c82c0b24496a728af74883ae, type: 3}
+  - {fileID: 4556308041612972665, guid: 7e4f0f25db86eb54197b3847e52bf6b7, type: 3}
+  - {fileID: 2591986883678568800, guid: 05159295e2b540449b061c4f195e9980, type: 3}
+  - {fileID: 7268680300216564036, guid: e05304d13c0dd4d49abd68c04c1883f0, type: 3}
+  - {fileID: 993388279586841945, guid: 913be730a62d7804ebaf29042013411d, type: 3}
+  - {fileID: 4715091856598767873, guid: 881648e9adfb2ae4a94325502588de8f, type: 3}
+  - {fileID: 6532626589319933394, guid: a21192d6de6d9b8488201690bb056c47, type: 3}

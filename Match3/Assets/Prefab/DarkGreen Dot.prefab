@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7801657064187739710}
   - component: {fileID: 7442152255046406994}
+  - component: {fileID: 7018585091993484916}
+  - component: {fileID: -1504676138032767172}
   m_Layer: 0
   m_Name: DarkGreen Dot
   m_TagString: Untagged
@@ -70,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 984115017
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 077332817b751934da17625a0742705e, type: 3}
   m_Color: {r: 0.07450981, g: 0.23529413, b: 0.24705884, a: 1}
@@ -84,3 +86,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &7018585091993484916
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781693576166362695}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.36571428
+--- !u!114 &-1504676138032767172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781693576166362695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262a48abf5ce31c43945234114dba582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swipeAngle: 0
