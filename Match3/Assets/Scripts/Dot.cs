@@ -18,10 +18,10 @@ public class Dot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        board= FindObjectOfType<Board>();
+        board = FindObjectOfType<Board>();
         targetX = (int)transform.position.x;
         targetY = (int)transform.position.y;
-        column= targetX;
+        column = targetX;
         row = targetY;
     }
 
@@ -29,15 +29,28 @@ public class Dot : MonoBehaviour
     void Update()
     {
         targetX = column;
-        targetY = row ;
-        if(Mathf.Abs(targetX-transform.position.x) > .1)
+        targetY = row;
+        if (Mathf.Abs(targetX - transform.position.x) > .1)
         {
             //Move towards the target
             tempPosition = new Vector2(targetX, transform.position.y);
             transform.position = Vector2.Lerp(transform.position, tempPosition, .4f);
-        }else
+        }
+        else
         {//Directly set position
             tempPosition = new Vector2(targetX, transform.position.y);
+            transform.position = tempPosition;
+            board.allDots[column, row] = this.gameObject;
+        }
+        if (Mathf.Abs(targetY - transform.position.y) > .1)
+        {
+            //Move towards the target
+            tempPosition = new Vector2(transform.position.x, targetY);
+            transform.position = Vector2.Lerp(transform.position, tempPosition, .4f);
+        }
+        else
+        {//Directly set position
+            tempPosition = new Vector2(transform.position.x, targetY);
             transform.position = tempPosition;
             board.allDots[column, row] = this.gameObject;
         }
@@ -45,8 +58,8 @@ public class Dot : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);   
-        
+        firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
     }
 
     private void OnMouseUp()
@@ -57,33 +70,34 @@ public class Dot : MonoBehaviour
 
     void CalculateAngle()
     {
-        swipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y, finalTouchPosition.x - firstTouchPosition.x) * 180/Mathf.PI;
+        swipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y, finalTouchPosition.x - firstTouchPosition.x) * 180 / Mathf.PI;
         Debug.Log(swipeAngle);
         MovePieces();
     }
 
     void MovePieces()
     {
-        if(swipeAngle > -45 && swipeAngle <= 45 && column<board.width)
+        if (swipeAngle > -45 && swipeAngle <= 45 && column < board.width)
         {// right swipe
-            otherDot= board.allDots[column + 1,row];
+            otherDot = board.allDots[column + 1, row];
             otherDot.GetComponent<Dot>().column -= 1;
             column += 1;
-        }else if (swipeAngle > 45 && swipeAngle <= 135 && row < board.height)
+        }
+        else if (swipeAngle > 45 && swipeAngle <= 135 && row < board.height)
         {// up swipe
-            otherDot = board.allDots[column , row+1];
+            otherDot = board.allDots[column, row + 1];
             otherDot.GetComponent<Dot>().row -= 1;
             row += 1;
         }
-        else if ((swipeAngle > 135 || swipeAngle <= -135) && column >0)
+        else if ((swipeAngle > 135 || swipeAngle <= -135) && column > 0)
         {//left swipe
             otherDot = board.allDots[column - 1, row];
             otherDot.GetComponent<Dot>().column += 1;
             column -= 1;
         }
-        else if (swipeAngle >= -135 && swipeAngle < -45 && row >0)
+        else if (swipeAngle >= -135 && swipeAngle < -45 && row > 0)
         {// down swipe
-            otherDot = board.allDots[column , row -1];
+            otherDot = board.allDots[column, row - 1];
             otherDot.GetComponent<Dot>().row += 1;
             row -= 1;
         }
