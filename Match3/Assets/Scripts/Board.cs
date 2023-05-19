@@ -31,7 +31,7 @@ public class Board : MonoBehaviour
                 backgroundTile.name = " ( " + i + ", " + j + " )";
                 int dotToUse = Random.Range(0, dots.Length);
                 int maxIterations = 0;
-                while (MatchesAt(i, j, dots[dotToUse]) && maxIterations <100)
+                while (MatchesAt(i, j, dots[dotToUse]) && maxIterations < 100)
                 {
                     dotToUse = Random.Range(0, dots.Length);
                     maxIterations++;
@@ -80,25 +80,51 @@ public class Board : MonoBehaviour
         return false;
     }
 
-    private void DestroyMatchesAt(int column, int row)
+    private void DestroyMatchesAt(int column, int row)// Destroy dot in a spesific cell
     {
         if (allDots[column, row].GetComponent<Dot>().isMatched)
         {
             Destroy(allDots[column, row]);
             allDots[column, row] = null;
+            Debug.Log("LAN SILDIK DE NULL MI?");
+            Debug.Log(allDots[column, row]);
         }
-    }
-    public void DestroyMatches()
+    }   
+    public void DestroyMatches()// scan the grid and destroy matches
     {
-        for(int i=0;i<width; i++)
+        for (int i = 0; i < width; i++)
         {
-            for(int j=0;  j<height; j++)
+            for (int j = 0; j < height; j++)
             {
-                if (allDots[i,j ] != null)
+                if (allDots[i, j] != null)
                 {
                     DestroyMatchesAt(i, j);
                 }
             }
         }
+        StartCoroutine(DecreaseRowCo());
+    }
+    private IEnumerator DecreaseRowCo()//Vertical fill of empty cells function
+    {
+        int nullCount = 0;
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (allDots[i, j] == null)
+                {
+                    Debug.Log("NULL FOUND INCREASING nullCount");
+                    nullCount++;
+                }else if (nullCount > 0)
+                {
+                    allDots[i, j].GetComponent<Dot>().row -= nullCount;
+                    allDots[i, j] = null;
+                }
+            }
+            Debug.Log("Null count of colum "+i+" is "+nullCount);
+            nullCount = 0;
+        }
+
+        yield return new WaitForSeconds(.2f);
     }
 }

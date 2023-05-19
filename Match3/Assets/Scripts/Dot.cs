@@ -48,30 +48,36 @@ public class Dot : MonoBehaviour
         {
             //Move towards the target
             tempPosition = new Vector2(targetX, transform.position.y);
-            transform.position = Vector2.Lerp(transform.position, tempPosition, .4f);
+            transform.position = Vector2.Lerp(transform.position, tempPosition, .6f);
+            if (board.allDots[column,row] != this.gameObject )
+            {
+                board.allDots[column,row] = this.gameObject;    
+            }
         }
         else
         {//Directly set position
             tempPosition = new Vector2(targetX, transform.position.y);
             transform.position = tempPosition;
-            board.allDots[column, row] = this.gameObject;
         }
         if (Mathf.Abs(targetY - transform.position.y) > .1)
         {
             //Move towards the target
             tempPosition = new Vector2(transform.position.x, targetY);
-            transform.position = Vector2.Lerp(transform.position, tempPosition, .4f);
+            transform.position = Vector2.Lerp(transform.position, tempPosition, .6f);
+            if (board.allDots[column, row] != this.gameObject)
+            {
+                board.allDots[column, row] = this.gameObject;
+            }
         }
         else
         {//Directly set position    
             tempPosition = new Vector2(transform.position.x, targetY);
             transform.position = tempPosition;
-            board.allDots[column, row] = this.gameObject;
         }
 
     }
 
-    public IEnumerator CheckMoveCo()// Flip back if t
+    public IEnumerator CheckMoveCo()// Function to flip back
     {
         yield return new WaitForSeconds(0.2f);
         if (otherDot != null)
@@ -118,26 +124,38 @@ public class Dot : MonoBehaviour
         if (swipeAngle > -45 && swipeAngle <= 45 && column < board.width - 1)
         {// right swipe
             otherDot = board.allDots[column + 1, row];
-            otherDot.GetComponent<Dot>().column -= 1;
-            column += 1;
+            if (otherDot != null)
+            {
+                otherDot.GetComponent<Dot>().column -= 1;
+                column += 1;
+            }
         }
         else if (swipeAngle > 45 && swipeAngle <= 135 && row < board.height - 1)
         {// up swipe
             otherDot = board.allDots[column, row + 1];
-            otherDot.GetComponent<Dot>().row -= 1;
-            row += 1;
+            if (otherDot != null)
+            {
+                otherDot.GetComponent<Dot>().row -= 1;
+                row += 1;
+            }
         }
         else if ((swipeAngle > 135 || swipeAngle <= -135) && column > 0)
         {//left swipe
             otherDot = board.allDots[column - 1, row];
-            otherDot.GetComponent<Dot>().column += 1;
-            column -= 1;
+            if (otherDot != null)
+            {
+                otherDot.GetComponent<Dot>().column += 1;
+                column -= 1;
+            }
         }
         else if (swipeAngle >= -135 && swipeAngle < -45 && row > 0)
         {// down swipe
             otherDot = board.allDots[column, row - 1];
-            otherDot.GetComponent<Dot>().row += 1;
-            row -= 1;
+            if (otherDot != null)
+            {
+                otherDot.GetComponent<Dot>().row += 1;
+                row -= 1;
+            }
         }
         StartCoroutine(CheckMoveCo());
     }
